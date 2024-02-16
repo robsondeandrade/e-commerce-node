@@ -4,6 +4,7 @@ import { env } from './env'
 import userRoutes from './routes/userRoutes'
 import productRoutes from './routes/productRoutes'
 import authRoutes from './routes/authRoutes'
+import favoriteRoutes from './routes/favoriteRoutes'
 
 const app = Fastify({
     logger: true,
@@ -14,6 +15,7 @@ const start = async () => {
     app.register(userRoutes)
     app.register(productRoutes)
     app.register(authRoutes)
+    app.register(favoriteRoutes)
 
     try {
         const port = parseInt(env.PORT || '3333', 10)

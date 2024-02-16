@@ -15,6 +15,7 @@ model User {
   created_at   DateTime?      @default(now())
   updated_at   DateTime?      @default(now())
   RefreshToken RefreshToken[]
+  Favorite     Favorite[]
 
   @@map("users")
 }
@@ -25,4 +26,17 @@ model RefreshToken {
   token  String   @unique
   expiry DateTime
   user   User     @relation(fields: [userId], references: [id])
+}
+
+model Favorite {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  title              String
+  thumbnail          String
+  quantity           Int
+  available_quantity Int
+  price              Float
+  User               User     @relation(fields: [userId], references: [id])
+  userId             String   @db.ObjectId
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
 }
