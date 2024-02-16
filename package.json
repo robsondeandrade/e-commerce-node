@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "tsx watch src/app.ts",
     "build": "tsc",
+    "postbuild": "prisma generate",
+    "dev": "tsx watch src/app.ts",
     "start": "node build/app.js"
   },
   "devDependencies": {
