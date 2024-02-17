@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "tsc",
-    "postbuild": "prisma generate",
+    "build": "tsc && prisma generate",
     "dev": "tsx watch src/app.ts",
     "start": "node build/app.js"
   },
