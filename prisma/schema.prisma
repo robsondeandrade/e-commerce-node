@@ -32,7 +32,7 @@ model Favorite {
   id                 String   @id @default(auto()) @map("_id") @db.ObjectId
   title              String
   thumbnail          String
-  quantity           Int
+  favoriteId         String
   available_quantity Int
   price              Float
   User               User     @relation(fields: [userId], references: [id])
