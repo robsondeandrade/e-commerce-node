@@ -1,5 +1,4 @@
 import { FastifyInstance } from 'fastify'
-import { authenticate } from '../middlewares/authenticate'
 import { RefreshTokenService } from '../services/RefreshTokenService'
 import { RefreshTokenController } from '../controllers/RefreshTokenController'
 import { LoginUserService } from '../services/LoginUserService'
@@ -16,7 +15,6 @@ export default async function authRoutes(fastify: FastifyInstance): Promise<void
 
     fastify.post(
         '/refresh-token',
-        { preValidation: [authenticate] },
         refreshTokenController.handleRefreshToken.bind(refreshTokenController),
     )
 }
