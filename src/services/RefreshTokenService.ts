@@ -34,11 +34,25 @@ class RefreshTokenService {
         }
 
         const newAccessToken = this.generateAccessToken(userId)
-        return newAccessToken
+        const newRefreshToken = this.generateRefreshToken(userId)
+
+        await prisma.refreshToken.update({
+            where: { id: storedToken.id },
+            data: {
+                token: newRefreshToken,
+                expiry: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+            },
+        })
+
+        return { newAccessToken, newRefreshToken }
     }
 
     private generateAccessToken(userId: string): string {
         return jwt.sign({ userId }, env.JWT_SECRET, { expiresIn: '1h' })
+    }
+
+    private generateRefreshToken(userId: string): string {
+        return jwt.sign({ userId }, env.JWT_REFRESH_SECRET, { expiresIn: '7d' })
     }
 }
 
