@@ -16,6 +16,7 @@ model User {
   updated_at   DateTime?      @default(now())
   RefreshToken RefreshToken[]
   Favorite     Favorite[]
+  Cart         Cart[]
 
   @@map("users")
 }
@@ -37,6 +38,20 @@ model Favorite {
   price              Float
   User               User     @relation(fields: [userId], references: [id])
   userId             String   @db.ObjectId
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+}
+
+model Cart {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  title              String
+  thumbnail          String
+  productId          String
+  available_quantity Int
+  price              Float
+  quantity           Int      @default(1)
+  userId             String   @db.ObjectId
+  User               User     @relation(fields: [userId], references: [id])
   created_at         DateTime @default(now())
   updated_at         DateTime @updatedAt
 }
